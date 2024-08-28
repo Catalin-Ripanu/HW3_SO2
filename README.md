@@ -6,7 +6,7 @@ The driver uses interrupts for both reception and transmission to reduce latency
 
 A blocking read call means that the read routine called from the user-space will be blocked until at least one byte is read (the read buffer in the kernel is empty and no data can be read). A blocking write call means that the write routine called from the user-space will be blocked until at least one byte is written (the write buffer in the kernel is full and no data can be written).
 
-![alt text](http://github.com/CatalinACS/HW3_SO2/buffers-scheme.png)
+![alt text](https://github.com/CatalinACS/HW3_SO2/blob/main/buffers-scheme.png)
 
 Data transfer between the various buffers is a Producer-Consumer problem. Example:
 
