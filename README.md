@@ -1,6 +1,8 @@
 # HW3_SO2
 
-A kernel module that implements a driver for the serial port (UART16550). The device driver supports the two standard serial ports in a PC, COM1 and COM2 (0x3f8 and 0x2f8, in fact the entire range of 8 addresses 0x3f8-0x3ff and 0x2f8-0x2ff specific to the two ports). In addition to the standard routines (open, read, write, close), the driver must also have support for changing communication parameters using an ioctl operation (UART16550_IOCTL_SET_LINE).
+A kernel module that implements a driver for the serial port (UART16550).
+
+The device driver supports the two standard serial ports in a PC, COM1 and COM2 (0x3f8 and 0x2f8, in fact the entire range of 8 addresses 0x3f8-0x3ff and 0x2f8-0x2ff specific to the two ports). In addition to the standard routines (open, read, write, close), the driver must also have support for changing communication parameters using an ioctl operation (UART16550_IOCTL_SET_LINE).
 
 The driver uses interrupts for both reception and transmission to reduce latency and CPU usage time. Read and write calls must also be blocking. A buffer for the read routine and another buffer for the write routine for each serial port in the driver are being used.
 
@@ -14,7 +16,7 @@ Data transfer between the various buffers is a Producer-Consumer problem. Exampl
 
 - The process is the consumer and the device is the producer if it is read from a process from the device; the process will block until there is at least one element in the producer's buffer.
 
-Implementation details:
+## Implementation details:
 
 - The driver is implemented as a kernel module named uart16550.ko
 
@@ -42,6 +44,4 @@ Implementation details:
 
       - `cat /proc/ioports | grep serial` will detect the presence of the default driver on the regions where COM1 and COM2 are defined
     
-        - in order to deactivate it, the kernel must be recompiled, either by setting the serial driver as the module, or by deactivating it completely (this modification is already made on the virtual machine)
-      
-            - Device Drivers -> Character devices -> Serial driver -> 8250/16550 and compatible serial support.
+        - in order to deactivate it, the kernel must be recompiled, either by setting the serial driver as the module, or by deactivating it completely.
